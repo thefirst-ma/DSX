@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    namespace：必须与对应的接口全类名一致  UserMapper.java
+    id ：必须与对应接口的某个对应的方法名一致即必须要和UserMapper.java接口中的方法同名。
+    v_id,s_id,v_name,s_name,v_price,v_grade,v_type
+ -->
+
+<mapper namespace="org.keshe.dsx.mapper.ShopOrderMapper">
+
+    <select id="findByUUid" resultType="shopOrder" parameterType="String">
+        SELECT * FROM order1 WHERE o_id = #{oId}
+    </select>
+
+<!--    &lt;!&ndash; 查询订单中的商品信息&ndash;&gt;-->
+<!--    <select id="findAll1" resultType="vegetableOrder" parameterType="String">-->
+<!--        SELECT * FROM order_veget-->
+<!--    </select>-->
+
+    <!-- 查询订单信息-->
+    <select id="findAll" resultType="shopOrder" parameterType="String">
+        SELECT * FROM order1
+    </select>
+
+    <!-- 插入一个订单-->
+    <insert id="insert"  parameterType="shopOrder">
+        insert into order1 (o_id,name1,phone,o_price,condition,payway,time1)
+        values (#{oId}, #{name1}, #{phone},#{oPrice}, #{condition}, #{payway}, #{time1})
+    </insert>
+
+    <!-- 插入一个菜品到订单中-->
+<!--    <insert id="insert1"  parameterType="shopOrder">-->
+<!--        insert into order1 (o_id,name1,phone,o_price,condition,payway,time1)-->
+<!--        values (#{oId}, #{name1}, #{phone},#{oPrice}, #{condition}, #{payway}, #{time1})-->
+<!--    </insert>-->
+
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    namespace：必须与对应的接口全类名一致  UserMapper.java
+    id ：必须与对应接口的某个对应的方法名一致即必须要和UserMapper.java接口中的方法同名。
+    v_id,s_id,v_name,s_name,v_price,v_grade,v_type
+ -->
+
+<mapper namespace="org.keshe.dsx.mapper.VegetableOrderMapper">
+
+    <!-- 查找全部菜品信息-->
+    <select id="findAll" resultType="vegetableOrder" parameterType="String">
+        SELECT * FROM order_veget
+    </select>
+
+    <!--更新菜品 parameterType="vegetable"-->
+<!--    <update id="update" parameterType="vegetable" >-->
+<!--      update vegetable-->
+<!--      set v_grade = #{vGrade}-->
+<!--      where v_id = #{vId}-->
+<!--   </update>-->
+    <insert id="insert" parameterType="vegetableOrder">
+      insert into order_veget(o_id,v_id,v_name)
+      values (#{oId}, #{vId}, #{vName})
+    </insert>
+
+
+    <!--根据id查询,返回一个Vegetable-->
+    <select id="findByUUid" resultType="vegetableOrder" parameterType="String">
+      select * from order_veget  where o_id = #{oId}
+        <!-- 在有些情况下 mybatis 在查询mysql中的第一条数据时 总返回 空数据 但是在mysql中确实可以查询-->
+        <!-- 在这里添加判断条件后 可以正常运行-->
+<!--        <choose>-->
+<!--            <when test="vId `4` ">-->
+<!--                v_id = #{vId}-->
+<!--            </when>-->
+<!--            <otherwise>-->
+<!--                v_id = 4-->
+<!--            </otherwise>-->
+<!--        </choose>-->
+    </select>
+
+</mapper>
